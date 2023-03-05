@@ -1,5 +1,6 @@
-package com.kakao.musicqdomaintest.member;
+package com.kakao.musicqdomaintest.member.Persistence;
 
+import com.kakao.musicqdomaintest.member.Domain.MemberDomain;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
