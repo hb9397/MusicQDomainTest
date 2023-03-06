@@ -3,8 +3,9 @@ package com.kakao.musicqdomaintest.member.Service;
 import com.kakao.musicqdomaintest.member.Domain.MemberDomain;
 import com.kakao.musicqdomaintest.member.Domain.MemberImageDomain;
 import com.kakao.musicqdomaintest.member.Dto.MemberImageDto;
-import com.kakao.musicqdomaintest.member.Dto.MemberInfoCUDto;
 import com.kakao.musicqdomaintest.member.Dto.MemberInfoResDto;
+
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -12,22 +13,22 @@ import java.util.Map;
 
 @Service
 public interface MemberService {
-    default Map<String, Object> memberinfoToEntity(MemberInfoCUDto memberInfoCUDto){
+    default Map<String, Object> memberinfoToEntity(String memberInfoCUDto){
         Map<String, Object> entityMap = new HashMap<>();
+        JSONObject memberInfo = new JSONObject(memberInfoCUDto);
 
         MemberDomain memberDomain = MemberDomain.builder()
-                .id(memberInfoCUDto.getId())
-                .email(memberInfoCUDto.getEmail())
-                .nickname(memberInfoCUDto.getNickname())
-                .password(memberInfoCUDto.getPassword())
+                .id(memberInfo.getString("id"))
+                .email(memberInfo.getString("email"))
+                .nickname(memberInfo.getString("nickname"))
+                .password(memberInfo.getString("password"))
                 .build();
 
         entityMap.put("member", memberDomain);
 
-        MemberImageDto memberImageDto = memberInfoCUDto.getMemberImageDto();
 
         MemberImageDomain memberImageDomain = MemberImageDomain.builder()
-                .profile_img(memberImageDto.getProfile_img())
+                .profile_img("a.img")
                 .memberDomain(memberDomain)
                 .build();
         entityMap.put("member_image", memberImageDomain);
@@ -54,6 +55,8 @@ public interface MemberService {
 
         return memberInfoResDto;
     }
-
-    MemberInfoResDto signup(MemberInfoCUDto memberInfoCUDto);
+    MemberInfoResDto signup(String memberInfoReq);
+    Long findId(String id);
+    Long findEmail(String email);
+    Long findNickname(String nickname);
 }
