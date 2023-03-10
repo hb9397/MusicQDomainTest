@@ -1,4 +1,4 @@
-package com.kakao.musicqdomaintest.member.Service;
+package com.kakao.musicqdomaintest.member.PersistenceService;
 
 import com.kakao.musicqdomaintest.member.Domain.MemberDomain;
 import com.kakao.musicqdomaintest.member.Domain.MemberImageDomain;

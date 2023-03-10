@@ -1,4 +1,4 @@
-package com.kakao.musicqdomaintest.member.Service;
+package com.kakao.musicqdomaintest.member.PersistenceService;
 
 import com.kakao.musicqdomaintest.member.Domain.MemberDomain;
 import com.kakao.musicqdomaintest.member.Domain.MemberImageDomain;
@@ -32,7 +32,7 @@ public class MemberServiceImpl implements MemberService{
             log.warn("이미 있어");
         }
 
-        Map<String,Object> entityMap = memberinfoToEntity(memberInfoReq);
+        Map<String,Object> entityMap = memberinfoToEntity(memberInfoReq );
 
         MemberDomain memberDomain = (MemberDomain) entityMap.get("member");
         memberDomain.setPassword(passwordEncoder.encode(memberInfo.getString("password")));
